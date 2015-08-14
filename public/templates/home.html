@@ -1,0 +1,47 @@
+<form ng-submit="addTask()" class="" style="margin-bottom: 30px;">
+  <h3>Add a new task</h3>
+
+  <div class="form-group">
+    <input type="text" class="form-control" placeholder="Title" ng-model="title"></input>
+  </div>
+
+  <div class="form-group">
+    <input type="text" class="form-control" placeholder="Description" ng-model="description"></input>
+  </div>
+
+  <button type="submit" class="btn btn-primary">Task</button>
+</form>
+
+<div ui-sortable ng-model="tasks" class="">
+  <div class="list-group well" ng-repeat="task in tasks">
+    <div class="list-group-separator"></div>
+    <div class="list-group-item">
+      <div class="row-action-primary checkbox" style="margin-top: 25px;">
+        <label>
+          <input type="checkbox" ng-checked="task.complete" ng-click="toggleComplete(task)">
+        </label>
+      </div>
+        <div class="row-content">
+            <a href="#/tasks/{{task._id}}" ng-class="{strike: task.complete}" class="list-group-item-heading">
+              <span class="pull-right">{{task.subtasks.length}} Subtasks</span>
+              <h3>{{task.title}}</h3>
+            </a>
+            <p class="list-group-item-text" ng-class="{strike: task.complete}">
+              {{task.description}}
+            </p>
+            <div class="panel-body">
+              <div ng-repeat="subtask in task.subtasks | orderBy : '+priority'">
+                <blockquote>
+
+                  <span ng-class="{strike: subtask.complete}">{{subtask.title}}</span>
+
+                  <small class="pull-right">Priority: {{subtask.priority}}</small>
+                </blockquote>
+              </div>
+            </div>
+            <a class="btn btn-xs pull-right" ng-click="deleteTask(task, $index)"><i class="mdi-action-delete"></i></a>
+        </div>
+    </div>
+    <div class="list-group-separator"></div>
+  </div>
+</div>

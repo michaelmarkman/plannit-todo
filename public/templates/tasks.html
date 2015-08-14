@@ -1,0 +1,45 @@
+<a href="#/" style="margin-left: 15px; margin-top: 40px;" class="btn btn-primary btn-fab btn-raised mdi-navigation-arrow-back pull-left"></a>
+<div class="well">
+<div class="page-header" style="margin-top: 0px; margin-bottom: 50px">
+  <div style="margin-bottom: 10px; margin-left: 80px" class="">
+    <h2>{{task.title}}</h2>
+    <p>{{task.description}}</p>
+  </div>
+</div>
+
+<div ng-repeat="subtask in task.subtasks | orderBy : '+priority'" class="list-group">
+    <div class="list-group-item">
+        <div class="row-action-primary checkbox" style="margin: 0px;">
+            <label>
+              <input type="checkbox" ng-checked="subtask.complete" ng-click="toggleComplete(subtask)">
+            </label>
+        </div>
+        <div class="row-content">
+            <h5 class="list-group-item-heading" ng-class="{strike: subtask.complete}">{{subtask.title}}<p class="pull-right">Priority: {{subtask.priority}}</p></h5>
+        </div>
+    </div>
+    <div class="list-group-separator"></div>
+</div>
+</div>
+
+<form ng-submit="addSubtask()" class="well" style="margin-top:30px;">
+  <h3>Add a new subtask</h3>
+
+  <div class="form-group">
+    <input type="text" class="form-control" placeholder="Subtask" ng-model="title"></input>
+  </div>
+
+  <div class="form-group">
+    <label for="priority-select" class="col-lg-2 control-label">Selects</label>
+    <div class="col-lg-10">
+       <select class="form-control" id="priority-select" ng-model="priority">
+         <option value=''>- Select a Priority -</option>
+         <option>1</option>
+         <option>2</option>
+         <option>3</option>
+       </select>
+    </div>
+  </div>
+
+  <button ng-disabled="!priority && !(title === '')" type="submit" class="btn btn-primary">Task</button>
+</form>

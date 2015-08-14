@@ -1,0 +1,36 @@
+<div class="page-header">
+  <h1>Plannit</h1>
+</div>
+
+<div ng-repeat="task in tasks | orderBy:'-upvotes'">
+  <span class="glyphicon glyphicon-ok" ng-click="incrementUpvotes(task)"></span>
+    {{task.upvotes}}
+
+  <span style="font-size: 20px; margin-left: 10px;">
+    <a ng-show="task.link" href="{{task.link}}">
+      {{task.title}}
+    </a>
+
+    <span ng-hide="task.link">
+      {{task.title}}
+    </span>
+
+    <span>
+      <a href="#/tasks/{{$index}}">Subtasks</a>FVsdv
+    </span>
+  </span>
+</div>
+
+<form ng-submit="addTask()" style="margin-top:30px;">
+  <h3>Add a new task</h3>
+
+  <div class="form-group">
+    <input type="text" class="form-control" placeholder="Title" ng-model="title"></input>
+  </div>
+
+  <div class="form-group">
+    <input type="text" class="form-control" placeholder="Link" ng-model="link"></input>
+  </div>
+
+  <button type="submit" class="btn btn-primary">Task</button>
+</form>

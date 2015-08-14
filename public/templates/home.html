@@ -22,20 +22,18 @@
         </label>
       </div>
         <div class="row-content">
-            <a href="#/tasks/{{task._id}}" ng-class="{strike: task.complete}" class="list-group-item-heading">
-              <span class="pull-right">{{task.subtasks.length}} Subtasks</span>
+            <h4 class="pull-right">{{task.subtasks.length}} Subtasks</h4>
+            <a style="color: #009688" href="#/tasks/{{task._id}}" ng-class="{strike: task.complete}" class="list-group-item-heading">
               <h3>{{task.title}}</h3>
             </a>
-            <p class="list-group-item-text" ng-class="{strike: task.complete}">
+            <p class="list-group-item-text" style="margin-bottom: 20px;" ng-class="{strike: task.complete}">
               {{task.description}}
             </p>
             <div class="panel-body">
               <div ng-repeat="subtask in task.subtasks | orderBy : '+priority'">
                 <blockquote>
-
                   <span ng-class="{strike: subtask.complete}">{{subtask.title}}</span>
-
-                  <small class="pull-right">Priority: {{subtask.priority}}</small>
+                  <small ng-class="{strike: subtask.complete}" class="pull-right">Priority: {{subtask.priority}}</small>
                 </blockquote>
               </div>
             </div>

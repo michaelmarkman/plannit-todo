@@ -1,25 +1,26 @@
 <a href="#/" style="margin-left: 15px; margin-top: 40px;" class="btn btn-primary btn-fab btn-raised mdi-navigation-arrow-back pull-left"></a>
 <div class="well">
-<div class="page-header" style="margin-top: 0px; margin-bottom: 50px">
-  <div style="margin-bottom: 10px; margin-left: 80px" class="">
-    <h2>{{task.title}}</h2>
-    <p>{{task.description}}</p>
-  </div>
-</div>
-
-<div ng-repeat="subtask in task.subtasks | orderBy : '+priority'" class="list-group">
-    <div class="list-group-item">
-        <div class="row-action-primary checkbox" style="margin: 0px;">
-            <label>
-              <input type="checkbox" ng-checked="subtask.complete" ng-click="toggleComplete(subtask)">
-            </label>
-        </div>
-        <div class="row-content">
-            <h5 class="list-group-item-heading" ng-class="{strike: subtask.complete}">{{subtask.title}}<p class="pull-right">Priority: {{subtask.priority}}</p></h5>
-        </div>
+  <div class="page-header" style="margin-top: 0px; margin-bottom: 30px">
+    <div style="margin-bottom: 10px; margin-left: 85px" class="">
+      <h2>{{task.title}}</h2>
+      <p>{{task.description}}</p>
     </div>
-    <div class="list-group-separator"></div>
-</div>
+  </div>
+
+  <div ng-repeat="subtask in task.subtasks | orderBy : '+priority'" class="list-group">
+      <div class="list-group-item">
+          <div class="row-action-primary checkbox" style="margin-top: 10px;">
+              <label>
+                <input type="checkbox" ng-checked="subtask.complete" ng-click="toggleComplete(subtask)">
+              </label>
+          </div>
+          <div class="row-content">
+              <a style="left: 20px;" class="btn btn-xs pull-right" ng-click="removeSubtask(task, subtask, $index)"><i class="mdi-action-delete"></i></a>
+              <h5 style="margin-top: 13px;" class="list-group-item-heading" ng-class="{strike: subtask.complete}">{{subtask.title}}<p class="pull-right" ng-class="{strike: subtask.complete}">Priority: {{subtask.priority}}</p></h5>
+          </div>
+      </div>
+      <div class="list-group-separator"></div>
+  </div>
 </div>
 
 <form ng-submit="addSubtask()" class="well" style="margin-top:30px;">

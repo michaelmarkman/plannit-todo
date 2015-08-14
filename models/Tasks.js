@@ -18,6 +18,6 @@ TaskSchema.methods.deleteTask = function(cb) {
 
     console.log('Task successfully deleted!');
   });
-}
+};
 
 mongoose.model('Task', TaskSchema);

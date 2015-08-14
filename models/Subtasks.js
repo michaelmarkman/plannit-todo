@@ -12,4 +12,12 @@ SubtaskSchema.methods.toggleComplete = function(cb) {
   this.save(cb);
 };
 
+SubtaskSchema.methods.deleteSubtask = function(cb) {
+  this.remove(function(err) {
+    if (err) throw err;
+
+    console.log('Subtask successfully deleted!');
+  });
+};
+
 mongoose.model('Subtask', SubtaskSchema);

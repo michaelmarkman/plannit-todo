@@ -126,6 +126,16 @@ router.put('/tasks/:task/subtasks/:subtask/complete', function(req, res, next) {
   });
 });
 
+// Marks a subtask as complete
+router.delete('/tasks/:task/subtasks/:subtask', function(req, res, next) {
+  req.subtask.deleteSubtask(function(err, subtask) {
+    if (err) {
+      return next(err);
+    }
+    res.json(subtask);
+  });
+});
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });

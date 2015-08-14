@@ -29,9 +29,10 @@ app.factory('tasks', ['$http', function($http) {
     return $http.delete('/tasks/' + task._id);
   };
 
-  // o.deleteSubtask = function(task, subtask) {
-  //   return $http.delete('/tasks/' + task._id + '/subtasks/' + subtask._id);
-  // };
+  o.deleteSubtask = function(task, subtask) {
+    console.log(subtask)
+    return $http.delete('/tasks/' + task._id + '/subtasks/' + subtask._id);
+  };
 
   o.get = function(id) {
     return $http.get('/tasks/' + id).then(function(res) {
@@ -110,6 +111,10 @@ app.controller('TasksController', [
       tasks.completeSubtask(task, subtask);
     };
 
+    $scope.removeSubtask = function(task, subtask, index) {
+      tasks.deleteSubtask(task, subtask);
+      $scope.task.subtasks.splice(index, 1);
+    }
   }
 ]);
 

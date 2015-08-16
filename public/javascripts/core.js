@@ -57,9 +57,11 @@ app.factory('tasks', ['$http', function($http) {
 // Main controller for the app
 app.controller('MainController', [
   '$scope',
+  '$state',
   'tasks',
-  function($scope, tasks) {
+  function($scope, $state, tasks) {
     $scope.tasks = tasks.tasks;
+    $scope.$state = $state;
 
     $scope.addTask = function() {
       // Check if it's empty
@@ -69,7 +71,8 @@ app.controller('MainController', [
       tasks.create({
         title: $scope.title,
         description: $scope.description,
-        complete: false
+        complete: false,
+        viewSubtasks: false
       });
       // Clear forms
       $scope.title = '';
@@ -83,6 +86,16 @@ app.controller('MainController', [
     $scope.deleteTask = function(task, index) {
       tasks.delete(task);
       $scope.tasks.splice(index, 1);
+    };
+
+    $scope.toggleSubtasks = function(task) {
+      task.viewSubtasks = !task.viewSubtasks;
+      // To reset the visibility clause
+      angular.forEach($scope.tasks, function(t) {
+        if (!(t === task)) {
+          t.viewSubtasks = false;
+        }
+      });
     }
   }
 ]);
@@ -134,6 +147,18 @@ app.config([
           }]
         }
       })
+
+      .state('home.subtasks', {
+        url: '/tasks{id}',
+        templateUrl: 'templates/subtasks.html',
+        controller: 'TasksController',
+        resolve: {
+          task: ['$stateParams', 'tasks', function($stateParams, tasks) {
+            return tasks.get($stateParams.id);
+          }]
+        }
+      })
+
       .state('tasks', {
         url: '/tasks/{id}',
         templateUrl: 'templates/tasks.html',

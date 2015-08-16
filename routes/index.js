@@ -9,7 +9,7 @@ var Subtask = mongoose.model('Subtask');
 // Get all of the tasks, and populate the subtasks array for each task with the actual objects (vs their id's by default)
 router.get('/tasks', function(req, res, next) {
   Task.find({}).populate('subtasks').exec(function(err, tasks) {
-    console.log(tasks);
+    // console.log(tasks);
     res.json(tasks);
   });
 });

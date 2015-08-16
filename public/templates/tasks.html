@@ -15,8 +15,13 @@
               </label>
           </div>
           <div class="row-content">
-              <a style="left: 20px;" class="btn btn-xs pull-right" ng-click="removeSubtask(task, subtask, $index)"><i class="mdi-action-delete"></i></a>
-              <h5 style="margin-top: 13px;" class="list-group-item-heading" ng-class="{strike: subtask.complete}">{{subtask.title}}<p class="pull-right" ng-class="{strike: subtask.complete}">Priority: {{subtask.priority}}</p></h5>
+              <a style="left: 20px;" class="btn btn-xs pull-right" ng-click="removeSubtask(task, subtask, $index)">
+                <i class="mdi-action-delete"></i>
+              </a>
+              <h5 style="margin-top: 13px;" class="list-group-item-heading" ng-class="{strike: subtask.complete}">
+                {{subtask.title}}
+                <p class="pull-right" ng-class="{strike: subtask.complete}">Priority: {{subtask.priority}}</p>
+              </h5>
           </div>
       </div>
       <div class="list-group-separator"></div>
@@ -31,8 +36,7 @@
   </div>
 
   <div class="form-group">
-    <label for="priority-select" class="col-lg-2 control-label">Selects</label>
-    <div class="col-lg-10">
+    <div class="">
        <select class="form-control" id="priority-select" ng-model="priority">
          <option value=''>- Select a Priority -</option>
          <option>1</option>
@@ -42,5 +46,5 @@
     </div>
   </div>
 
-  <button ng-disabled="!priority && !(title === '')" type="submit" class="btn btn-primary">Task</button>
+  <button ng-disabled="!priority && !(title === '')" type="submit" class="btn btn-primary">Add</button>
 </form>

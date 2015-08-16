@@ -1,0 +1,18 @@
+<div ng-repeat="subtask in task.subtasks | orderBy : '+priority'" class="list-group">
+    <div class="list-group-item">
+        <div class="row-action-primary checkbox" style="margin-top: 10px;">
+            <label>
+              <input type="checkbox" ng-checked="subtask.complete" ng-click="toggleComplete(subtask)">
+            </label>
+        </div>
+        <div class="row-content">
+            <a style="left: 20px;" class="btn btn-xs pull-right" ng-click="removeSubtask(task, subtask, $index)">
+              <i class="mdi-action-delete"></i>
+            </a>
+            <h5 style="margin-top: 13px;" class="list-group-item-heading" ng-class="{strike: subtask.complete}">
+              {{subtask.title}}
+            </h5>
+        </div>
+    </div>
+    <div class="list-group-separator"></div>
+</div>
